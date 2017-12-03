@@ -8,11 +8,13 @@
     <children>
         <Pane prefHeight="200.0" prefWidth="200.0">
             <children>
-                <Label layoutX="7.0" layoutY="6.0" text="Dealer" />
+                <Label alignment="CENTER" layoutX="310.0" layoutY="6.0" text="Dealer" />
+                <HBox layoutX="7.0" layoutY="23.0" prefHeight="100.0" prefWidth="603.0" />
             </children></Pane>
         <Pane prefHeight="200.0" prefWidth="200.0">
             <children>
-                <Label layoutX="3.0" layoutY="3.0" text="Sam" />
+                <Label alignment="CENTER" layoutX="310.0" layoutY="6.0" text="Sam" />
+                <HBox layoutX="3.0" layoutY="29.0" prefHeight="100.0" prefWidth="613.0" />
             </children></Pane>
         <Pane prefHeight="86.0" prefWidth="620.0">
             <children>

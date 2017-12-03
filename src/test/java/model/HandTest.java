@@ -44,4 +44,18 @@ public class HandTest {
 
         Assert.assertFalse(hand.isDoubleAces());
     }
+
+    @Test
+    public void isBusted() {
+        Hand hand1 = new Hand();
+        hand1.addCard(new Card(HEARTS, FIVE));
+        hand1.addCard(new Card(SPADES, EIGHT));
+        Assert.assertFalse(hand1.isBusted());
+
+        Hand hand2 = new Hand();
+        hand2.addCard(new Card(HEARTS, FIVE));
+        hand2.addCard(new Card(SPADES, KING));
+        hand2.addCard(new Card(SPADES, QUEEN));
+        Assert.assertTrue(hand2.isBusted());
+    }
 }

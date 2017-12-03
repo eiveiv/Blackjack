@@ -13,6 +13,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("table.fxml"));
         VBox box = loader.load();
         TableController tableController = loader.getController();
+
         Scene scene = new Scene(box);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
@@ -24,4 +25,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }

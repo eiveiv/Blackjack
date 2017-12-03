@@ -44,4 +44,8 @@ public class Hand {
             return false;
         }
     }
+
+    public boolean isBusted() {
+        return this.getTotalValue() > 21;
+    }
 }

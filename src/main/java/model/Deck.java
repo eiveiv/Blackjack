@@ -30,13 +30,13 @@ public class Deck {
         return cards;
     }
 
-    public Card drawCard() throws Exception {
+    public Card drawCard() {
         if (!this.cards.isEmpty()) {
             Card card = this.cards.get(0);
             this.cards.remove(0);
             return card;
         } else {
-            throw new Exception("Kortstokken er tom");
+            return null;
         }
     }
 }
