@@ -1,19 +1,23 @@
-package main.java.ui;
+package ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("table.fxml"));
+        VBox box = loader.load();
+        TableController tableController = loader.getController();
+        Scene scene = new Scene(box);
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
+
     }
 
 
