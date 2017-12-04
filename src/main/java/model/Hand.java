@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 import static model.CardValue.ACE;
 
@@ -48,5 +49,18 @@ public class Hand {
 
     public boolean isBusted() {
         return this.getTotalValue() > 21;
+    }
+
+    public boolean stopDrawingCards() {
+        return this.getTotalValue() >= 17;
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner stringJoiner = new StringJoiner(",");
+        this.cards.forEach(c -> {
+            stringJoiner.add(c.getShortName());
+        });
+        return stringJoiner.toString();
     }
 }
