@@ -53,8 +53,7 @@ public class TableController implements Initializable {
         }
 
         drawCard.addEventFilter(MouseEvent.MOUSE_CLICKED, (event -> {
-            samsHand.addCard(newDeck.drawCard());
-            samCards.getChildren().add( new CardView(samsHand.getCards().get(2)));
+            samCards.getChildren().add(new CardView(samsHand.addCard(newDeck.drawCard())));
             if (samsHand.isBusted()) {
                 gameOver();
             } else if(samsHand.stopDrawingCards()) {
@@ -69,7 +68,7 @@ public class TableController implements Initializable {
 
     public void dealerDraw() {
         while(dealerHand.getTotalValue() < 17) {
-            dealerHand.addCard(newDeck.drawCard());
+            dealerCards.getChildren().add(new CardView(dealerHand.addCard(newDeck.drawCard())));
         }
         gameOver();
     }
@@ -86,23 +85,11 @@ public class TableController implements Initializable {
         newDeck = new Deck();
         newDeck.createDeck();
         newDeck.shuffleNewDeck();
-        samsHand.addCard(newDeck.drawCard());
-        dealerHand.addCard(newDeck.drawCard());
-        samsHand.addCard(newDeck.drawCard());
-        dealerHand.addCard(newDeck.drawCard());
 
-        CardView cardView = new CardView(dealerHand.getCards().get(0));
-        CardView cardView1 = new CardView(dealerHand.getCards().get(1));
-
-        dealerCards.getChildren().add(cardView);
-        dealerCards.getChildren().add(cardView1);
-
-        CardView cardView3 = new CardView(samsHand.getCards().get(0));
-        CardView cardView4 = new CardView(samsHand.getCards().get(1));
-
-        samCards.getChildren().add(cardView3);
-        samCards.getChildren().add(cardView4);
-
+        samCards.getChildren().add(new CardView(samsHand.addCard(newDeck.drawCard())));
+        dealerCards.getChildren().add(new CardView(dealerHand.addCard(newDeck.drawCard())));
+        samCards.getChildren().add(new CardView(samsHand.addCard(newDeck.drawCard())));
+        dealerCards.getChildren().add(new CardView(dealerHand.addCard(newDeck.drawCard())));
     }
 
     private void gameOver() {
