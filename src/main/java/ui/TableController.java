@@ -1,16 +1,12 @@
 package ui;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import model.Card;
 import model.CardView;
 import model.Deck;
 import model.Hand;
@@ -18,17 +14,13 @@ import model.Hand;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static model.CardSuit.HEARTS;
-import static model.CardSuit.SPADES;
-import static model.CardValue.*;
-
 public class TableController implements Initializable {
+//
+//    private final ObservableList<CardView> samsHandView = FXCollections.observableArrayList();
+//    private final ObservableList<CardView> dealerHandView = FXCollections.observableArrayList();
 
     @FXML
     private Button drawCard;
-
-    @FXML
-    private TextArea samHand;
 
     @FXML
     private HBox samCards;
@@ -36,8 +28,11 @@ public class TableController implements Initializable {
     @FXML
     private HBox dealerCards;
 
-    private static final int CARD_WIDTH = 100;
-    private static final int CARD_HEIGHT = 140;
+
+
+    Deck newDeck = startNewGame();
+    Hand samsHand = new Hand();
+    Hand dealer = new Hand();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -55,14 +50,16 @@ public class TableController implements Initializable {
         CardView cardView = new CardView(dealer.getCards().get(0));
         CardView cardView1 = new CardView(dealer.getCards().get(1));
 
+//        dealerCards.setUserData(dealerHandView);
+//        dealerHandView.add(cardView);
         dealerCards.getChildren().add(cardView);
         dealerCards.getChildren().add(cardView1);
 
         CardView cardView3 = new CardView(samsHand.getCards().get(0));
         CardView cardView4 = new CardView(samsHand.getCards().get(1));
 
-        samCards.getChildren().add(cardView);
-        samCards.getChildren().add(cardView1);
+        samCards.getChildren().add(cardView3);
+        samCards.getChildren().add(cardView4);
 
         if (samsHand.isBlackjack() && dealer.isBlackjack()) {
             //Sam vinner
