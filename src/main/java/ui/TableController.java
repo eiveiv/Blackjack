@@ -61,8 +61,6 @@ public class TableController implements Initializable {
                 dealerDraw();
             }
 
-            drawCard.setDisable(samsHand.getTotalValue() >= 17);
-
         }));
     }
 
