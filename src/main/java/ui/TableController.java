@@ -54,6 +54,7 @@ public class TableController implements Initializable {
         drawCard.addEventFilter(MouseEvent.MOUSE_CLICKED, (event -> {
             samCards.getChildren().add(new CardView(samsHand.addCard(newDeck.drawCard())));
             if (samsHand.isBusted()) {
+                drawCard.setDisable(true);
                 gameOver();
             } else if(samsHand.stopDrawingCards()) {
                 drawCard.setDisable(true);
