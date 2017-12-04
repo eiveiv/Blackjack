@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import model.CardView;
 import model.Deck;
 import model.Hand;
 

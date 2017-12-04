@@ -1,9 +1,10 @@
-package model;
+package ui;
 
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import model.Card;
 
 public class CardView extends StackPane{
 
