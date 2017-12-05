@@ -21,6 +21,9 @@ public class TableController implements Initializable {
     private Button drawCard;
 
     @FXML
+    private Button newGame;
+
+    @FXML
     private HBox samCards;
 
     @FXML
@@ -29,45 +32,82 @@ public class TableController implements Initializable {
     @FXML
     private TextArea resultText;
 
-    Deck newDeck = new Deck();
-    Hand samsHand = new Hand();
-    Hand dealerHand = new Hand();
+    private String path = "";
+
+
+
+    public void setParameter(String parameter) {
+        if (parameter != null) {
+            path = parameter;
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("startup");
 
         //Programlogikk
+        game();
+        newGame.addEventFilter(MouseEvent.MOUSE_CLICKED, (event -> {
+            game();
+        }));
 
-        startNewGame();
+    }
+
+    private void game() {
+
+        init();
+
+        Deck deck = createDeck();
+        Hand samsHand = new Hand();
+        Hand dealerHand = new Hand();
+
+        samCards.getChildren().add(drawCard(samsHand, deck));
+        dealerCards.getChildren().add(drawCard(dealerHand, deck));
+        samCards.getChildren().add(drawCard(samsHand, deck));
+        dealerCards.getChildren().add(drawCard(dealerHand, deck));
 
         if (winnerFromStart(samsHand, dealerHand)) {
-            gameOver();
+            gameOver(samsHand, dealerHand);
         }
 
         if (samsHand.stopDrawingCards()) {
             drawCard.setDisable(true);
-            dealerDraw();
+            dealerDraw(dealerHand, samsHand, deck);
         }
 
-        drawCard.addEventFilter(MouseEvent.MOUSE_CLICKED, (event -> {
-            samCards.getChildren().add(new CardView(samsHand.addCard(newDeck.drawCard())));
+        drawCard.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
+            samCards.getChildren().add(drawCard(samsHand, deck));
+            System.out.println("sam trakk trakk kort");
             if (samsHand.isBusted()) {
                 drawCard.setDisable(true);
-                gameOver();
+                gameOver(samsHand, dealerHand);
             } else if(samsHand.stopDrawingCards()) {
                 drawCard.setDisable(true);
-                dealerDraw();
+                dealerDraw(dealerHand, samsHand, deck);
             }
-
         }));
     }
 
-    public void dealerDraw() {
-        while(dealerHand.getTotalValue() < 17) {
-            dealerCards.getChildren().add(new CardView(dealerHand.addCard(newDeck.drawCard())));
+    private void init() {
+        System.out.println("--------------------------------------------------");
+        samCards.getChildren().clear();
+        dealerCards.getChildren().clear();
+        drawCard.setDisable(false);
+        resultText.clear();
+
+    }
+
+    private void dealerDraw(Hand dealerHand, Hand samsHand, Deck deck) {
+        while(dealerHand.getTotalValue() <= samsHand.getTotalValue()) {
+            dealerCards.getChildren().add(drawCard(dealerHand, deck));
+            System.out.println("dealer trakk kort");
         }
-        gameOver();
+        gameOver(samsHand, dealerHand);
+    }
+
+    public CardView drawCard(Hand hand, Deck deck) {
+        return new CardView(hand.addCard(deck.drawCard()));
     }
 
     public boolean winnerFromStart(Hand samsHand, Hand dealerHand) {
@@ -78,18 +118,15 @@ public class TableController implements Initializable {
         }
     }
 
-    private void startNewGame() {
-        newDeck = new Deck();
+    private Deck createDeck() {
+        Deck newDeck = new Deck();
         newDeck.createDeck();
         newDeck.shuffleNewDeck();
 
-        samCards.getChildren().add(new CardView(samsHand.addCard(newDeck.drawCard())));
-        dealerCards.getChildren().add(new CardView(dealerHand.addCard(newDeck.drawCard())));
-        samCards.getChildren().add(new CardView(samsHand.addCard(newDeck.drawCard())));
-        dealerCards.getChildren().add(new CardView(dealerHand.addCard(newDeck.drawCard())));
+        return newDeck;
     }
 
-    private void gameOver() {
+    private void gameOver(Hand samsHand, Hand dealerHand) {
         boolean samWins = false;
         String result;
         if (samsHand.isBlackjack() || (dealerHand.isBusted() && !dealerHand.isDoubleAces())

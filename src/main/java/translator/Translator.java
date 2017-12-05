@@ -41,7 +41,7 @@ public class Translator {
 
     public static Deck toDeck(InputStream cardStream) throws IOException {
         Deck deck = new Deck();
-        String output = null;
+        String output;
         output = IOUtils.toString(cardStream, "UTF-8");
         List<String> cards = new ArrayList<>(Arrays.asList(output.split(",")));
         cards.forEach(c -> {
