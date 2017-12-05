@@ -18,6 +18,10 @@ public class Deck {
         return this;
     }
 
+    public void addCard(Card card) {
+        this.cards.add(card);
+    }
+
     public void createDeck() {
         Stream.of(CardSuit.values()).forEach(cs -> {
             Stream.of(CardValue.values()).forEach(cv -> {
