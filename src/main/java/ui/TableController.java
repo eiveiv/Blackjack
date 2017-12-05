@@ -29,7 +29,6 @@ public class TableController implements Initializable {
     @FXML
     private TextArea resultText;
 
-
     Deck newDeck = new Deck();
     Hand samsHand = new Hand();
     Hand dealerHand = new Hand();

@@ -4,7 +4,10 @@ import model.Card;
 import model.CardSuit;
 import model.CardValue;
 import model.Deck;
+import org.apache.commons.io.IOUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,8 +39,11 @@ public class Translator {
         return null;
     }
 
-    public static Deck toDeck(List<String> cards) {
+    public static Deck toDeck(InputStream cardStream) throws IOException {
         Deck deck = new Deck();
+        String output = null;
+        output = IOUtils.toString(cardStream, "UTF-8");
+        List<String> cards = new ArrayList<>(Arrays.asList(output.split(",")));
         cards.forEach(c -> {
             deck.addCard( Translator.doMap(c.trim()));
         });
