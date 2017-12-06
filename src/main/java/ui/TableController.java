@@ -90,6 +90,7 @@ public class TableController implements Initializable {
                 dealerDraw(dealerHand, samsHand, deck);
             }
         }));
+
     }
 
     private void init() {
@@ -98,10 +99,6 @@ public class TableController implements Initializable {
         dealerCards.getChildren().clear();
         drawCard.setDisable(false);
         resultText.clear();
-        drawCard.removeEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {}));
-        newGame.removeEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {}));
-
-
     }
 
     private Deck createDeckFromFile() throws IOException{

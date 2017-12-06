@@ -7,7 +7,10 @@ Blackjack spill med følgende regler.
 - Startkortene deles i rekkefølgen sam, dealer, sam, dealer
 
 Kan legge inn input fil som kortstokk, må være kommeseparert på følgende format D5,HJ,DK osv
+Hvis filen ikke finnes så lages det bare en vanlig kortstokk som stokkes
 
-For å kjøre fra kommandolinje må man bruke
+For å kjøre fra kommandolinje må man bruke jar-with-dependencies
+Eks
 
-mvn jfx:run
+java -jar target/Blackjack-1.0-SNAPSHOT-jar-with-dependencies.jar /home/eivind/textfiles/card32sv
+
