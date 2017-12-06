@@ -54,11 +54,14 @@ public class TableController implements Initializable {
             game();
         }));
 
+
+
     }
 
     private void game() {
 
         init();
+
 
         Deck deck = createDeck();
 
@@ -79,7 +82,8 @@ public class TableController implements Initializable {
             dealerDraw(dealerHand, samsHand, deck);
         }
 
-        drawCard.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
+
+        drawCard.setOnAction(event -> {
             samCards.getChildren().add(drawCard(samsHand, deck));
             System.out.println("sam trakk trakk kort");
             if (samsHand.isBusted()) {
@@ -89,7 +93,7 @@ public class TableController implements Initializable {
                 drawCard.setDisable(true);
                 dealerDraw(dealerHand, samsHand, deck);
             }
-        }));
+        });
 
     }
 
@@ -99,6 +103,8 @@ public class TableController implements Initializable {
         dealerCards.getChildren().clear();
         drawCard.setDisable(false);
         resultText.clear();
+        drawCard.disableProperty();
+
     }
 
     private Deck createDeckFromFile() throws IOException{
