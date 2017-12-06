@@ -8,14 +8,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import model.Deck;
 import model.Hand;
+import org.apache.commons.io.FileUtils;
+import translator.Translator;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TableController implements Initializable {
-//
-//    private final ObservableList<CardView> samsHandView = FXCollections.observableArrayList();
-//    private final ObservableList<CardView> dealerHandView = FXCollections.observableArrayList();
 
     @FXML
     private Button drawCard;
@@ -46,8 +50,6 @@ public class TableController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("startup");
 
-        //Programlogikk
-        game();
         newGame.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
             game();
         }));
@@ -59,6 +61,7 @@ public class TableController implements Initializable {
         init();
 
         Deck deck = createDeck();
+
         Hand samsHand = new Hand();
         Hand dealerHand = new Hand();
 
@@ -98,6 +101,21 @@ public class TableController implements Initializable {
         drawCard.removeEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {}));
         newGame.removeEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {}));
 
+
+    }
+
+    private Deck createDeckFromFile() throws IOException{
+        System.out.println("Creating new deck from" + path);
+        File file = new File(path);
+        Deck deck = new Deck();
+        String stringDeck = null;
+        stringDeck = FileUtils.readFileToString(file, "UTF-8");
+        List<String> cards = new ArrayList<>(Arrays.asList(stringDeck.split(",")));
+        cards.forEach(c -> {
+            deck.addCard( Translator.doMap(c.trim()));
+        });
+
+        return deck;
     }
 
     private void dealerDraw(Hand dealerHand, Hand samsHand, Deck deck) {
@@ -121,10 +139,14 @@ public class TableController implements Initializable {
     }
 
     private Deck createDeck() {
+        System.out.println("Creating new deck");
         Deck newDeck = new Deck();
-        newDeck.createDeck();
-        newDeck.shuffleNewDeck();
-
+        try {
+            newDeck = createDeckFromFile();
+        } catch (IOException e) {
+            newDeck.createDeck();
+            newDeck.shuffleNewDeck();
+        }
         return newDeck;
     }
 

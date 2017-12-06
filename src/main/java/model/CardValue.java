@@ -1,6 +1,6 @@
 package model;
 
-import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public enum CardValue {TWO("2"), THREE("3"), FOUR("4"), FIVE("5"), SIX("6"),SEVEN("7"), EIGHT("8"), NINE("9"), TEN("10"), JACK("J"), QUEEN("Q"), KING("K"), ACE("A");
 
@@ -11,7 +11,7 @@ public enum CardValue {TWO("2"), THREE("3"), FOUR("4"), FIVE("5"), SIX("6"),SEVE
     }
 
     public Integer getNumericValue() {
-        if (NumberUtils.isNumber(this.shortLetter)) {
+        if (StringUtils.isNumeric(this.shortLetter)) {
             return Integer.valueOf(this.shortLetter);
         } else {
             if (this == ACE) {
