@@ -7,3 +7,7 @@ Blackjack spill med følgende regler.
 - Startkortene deles i rekkefølgen sam, dealer, sam, dealer
 
 Kan legge inn input fil som kortstokk, må være kommeseparert på følgende format D5,HJ,DK osv
+
+For å kjøre fra kommandolinje må man bruke
+
+mvn jfx:run
