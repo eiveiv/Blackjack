@@ -39,14 +39,13 @@ public class Translator {
         return null;
     }
 
-    public static Deck toDeck(InputStream cardStream) throws IOException {
+    public static Deck toDeck(String deckString) throws IOException {
         Deck deck = new Deck();
-        String output;
-        output = IOUtils.toString(cardStream, "UTF-8");
-        List<String> cards = new ArrayList<>(Arrays.asList(output.split(",")));
+        List<String> cards = new ArrayList<>(Arrays.asList(deckString.split(",")));
         cards.forEach(c -> {
             deck.addCard( Translator.doMap(c.trim()));
         });
+
         return deck;
     }
 }

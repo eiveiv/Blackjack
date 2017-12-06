@@ -13,9 +13,8 @@ public class Deck {
         this.cards = new ArrayList<>();
     }
 
-    public Deck shuffleNewDeck() {
+    public void shuffleNewDeck() {
         Collections.shuffle(this.cards);
-        return this;
     }
 
     public void addCard(Card card) {

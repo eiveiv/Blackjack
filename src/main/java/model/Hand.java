@@ -23,7 +23,6 @@ public class Hand {
         return cards;
     }
 
-    //TODO denne viser 1 for mye
     public int getTotalValue() {
         int value = 0;
         for (Card c : this.cards) {

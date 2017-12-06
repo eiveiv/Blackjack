@@ -49,7 +49,7 @@ public class TableController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("startup");
-
+        drawCard.setDisable(true);
         newGame.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
             game();
         }));
@@ -82,7 +82,6 @@ public class TableController implements Initializable {
             dealerDraw(dealerHand, samsHand, deck);
         }
 
-
         drawCard.setOnAction(event -> {
             samCards.getChildren().add(drawCard(samsHand, deck));
             System.out.println("sam trakk trakk kort");
@@ -99,6 +98,7 @@ public class TableController implements Initializable {
 
     private void init() {
         System.out.println("Starting new game-------------------------------------");
+        drawCard.setDisable(false);
         samCards.getChildren().clear();
         dealerCards.getChildren().clear();
         drawCard.setDisable(false);
@@ -107,18 +107,12 @@ public class TableController implements Initializable {
 
     }
 
-    private Deck createDeckFromFile() throws IOException{
+    private Deck createDeckFromFile() throws Exception{
         System.out.println("Creating new deck from" + path);
         File file = new File(path);
-        Deck deck = new Deck();
         String stringDeck = null;
         stringDeck = FileUtils.readFileToString(file, "UTF-8");
-        List<String> cards = new ArrayList<>(Arrays.asList(stringDeck.split(",")));
-        cards.forEach(c -> {
-            deck.addCard( Translator.doMap(c.trim()));
-        });
-
-        return deck;
+        return Translator.toDeck(stringDeck);
     }
 
     private void dealerDraw(Hand dealerHand, Hand samsHand, Deck deck) {
@@ -129,11 +123,11 @@ public class TableController implements Initializable {
         gameOver(samsHand, dealerHand);
     }
 
-    public CardView drawCard(Hand hand, Deck deck) {
+    private CardView drawCard(Hand hand, Deck deck) {
         return new CardView(hand.addCard(deck.drawCard()));
     }
 
-    public boolean winnerFromStart(Hand samsHand, Hand dealerHand) {
+    private boolean winnerFromStart(Hand samsHand, Hand dealerHand) {
         if (samsHand.isBlackjack() && dealerHand.isBlackjack() || samsHand.isDoubleAces() && dealerHand.isDoubleAces()) {
             return true;
         } else {
@@ -146,7 +140,7 @@ public class TableController implements Initializable {
         Deck newDeck = new Deck();
         try {
             newDeck = createDeckFromFile();
-        } catch (IOException e) {
+        } catch (Exception e) {
             newDeck.createDeck();
             newDeck.shuffleNewDeck();
         }
