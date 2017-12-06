@@ -48,7 +48,7 @@ public class TableController implements Initializable {
 
         //Programlogikk
         game();
-        newGame.addEventFilter(MouseEvent.MOUSE_CLICKED, (event -> {
+        newGame.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
             game();
         }));
 
@@ -90,11 +90,13 @@ public class TableController implements Initializable {
     }
 
     private void init() {
-        System.out.println("--------------------------------------------------");
+        System.out.println("Starting new game-------------------------------------");
         samCards.getChildren().clear();
         dealerCards.getChildren().clear();
         drawCard.setDisable(false);
         resultText.clear();
+        drawCard.removeEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {}));
+        newGame.removeEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {}));
 
     }
 
