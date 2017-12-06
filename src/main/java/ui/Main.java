@@ -20,6 +20,7 @@ public class Main extends Application {
             tableController.setParameter(unnamed.get(0));
         }
         Scene scene = new Scene(box);
+        primaryStage.setTitle("Blackjack");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
