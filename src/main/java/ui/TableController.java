@@ -128,7 +128,7 @@ public class TableController implements Initializable {
     }
 
     private boolean winnerFromStart(Hand samsHand, Hand dealerHand) {
-        if (samsHand.isBlackjack() && dealerHand.isBlackjack() || samsHand.isDoubleAces() && dealerHand.isDoubleAces()) {
+        if (samsHand.isBlackjack() || dealerHand.isBlackjack() || samsHand.isDoubleAces() || dealerHand.isDoubleAces()) {
             return true;
         } else {
             return false;
