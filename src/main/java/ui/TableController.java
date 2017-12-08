@@ -3,20 +3,17 @@ package ui;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import model.Deck;
 import model.Hand;
 import org.apache.commons.io.FileUtils;
+import service.GameService;
 import translator.Translator;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class TableController implements Initializable {
@@ -28,16 +25,19 @@ public class TableController implements Initializable {
     private Button newGame;
 
     @FXML
-    private HBox samCards;
+    private HBox playerCards;
 
     @FXML
     private HBox dealerCards;
 
     @FXML
-    private TextArea resultText;
+    private Label resultText;
 
     private String path = "";
 
+    private static final String PLAYER = "Sam";
+
+    private GameService gameService = new GameService();
 
 
     public void setParameter(String parameter) {
@@ -65,32 +65,32 @@ public class TableController implements Initializable {
 
         Deck deck = createDeck();
 
-        Hand samsHand = new Hand();
+        Hand playerHand = new Hand();
         Hand dealerHand = new Hand();
 
-        samCards.getChildren().add(drawCard(samsHand, deck));
+        playerCards.getChildren().add(drawCard(playerHand, deck));
         dealerCards.getChildren().add(drawCard(dealerHand, deck));
-        samCards.getChildren().add(drawCard(samsHand, deck));
+        playerCards.getChildren().add(drawCard(playerHand, deck));
         dealerCards.getChildren().add(drawCard(dealerHand, deck));
 
-        if (winnerFromStart(samsHand, dealerHand)) {
-            gameOver(samsHand, dealerHand);
+        if (gameService.winnerFromStart(playerHand, dealerHand)) {
+            gameOver(playerHand, dealerHand);
         }
 
-        if (samsHand.stopDrawingCards()) {
+        if (playerHand.stopDrawingCards()) {
             drawCard.setDisable(true);
-            dealerDraw(dealerHand, samsHand, deck);
+            dealerDraw(dealerHand, playerHand, deck);
         }
 
         drawCard.setOnAction(event -> {
-            samCards.getChildren().add(drawCard(samsHand, deck));
+            playerCards.getChildren().add(drawCard(playerHand, deck));
             System.out.println("sam trakk trakk kort");
-            if (samsHand.isBusted()) {
+            if (playerHand.isBusted()) {
                 drawCard.setDisable(true);
-                gameOver(samsHand, dealerHand);
-            } else if(samsHand.stopDrawingCards()) {
+                gameOver(playerHand, dealerHand);
+            } else if(playerHand.stopDrawingCards()) {
                 drawCard.setDisable(true);
-                dealerDraw(dealerHand, samsHand, deck);
+                dealerDraw(dealerHand, playerHand, deck);
             }
         });
 
@@ -98,12 +98,10 @@ public class TableController implements Initializable {
 
     private void init() {
         System.out.println("Starting new game-------------------------------------");
-        drawCard.setDisable(false);
-        samCards.getChildren().clear();
+        playerCards.getChildren().clear();
         dealerCards.getChildren().clear();
         drawCard.setDisable(false);
-        resultText.clear();
-        drawCard.disableProperty();
+        resultText.setText("");
 
     }
 
@@ -127,14 +125,6 @@ public class TableController implements Initializable {
         return new CardView(hand.addCard(deck.drawCard()));
     }
 
-    private boolean winnerFromStart(Hand samsHand, Hand dealerHand) {
-        if (samsHand.isBlackjack() || dealerHand.isBlackjack() || samsHand.isDoubleAces() || dealerHand.isDoubleAces()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     private Deck createDeck() {
         System.out.println("Creating new deck");
         Deck newDeck = new Deck();
@@ -147,17 +137,14 @@ public class TableController implements Initializable {
         return newDeck;
     }
 
-    private void gameOver(Hand samsHand, Hand dealerHand) {
-        boolean samWins = false;
+    private void gameOver(Hand playerHand, Hand dealerHand) {
+        boolean playerWon = gameService.playerWon(playerHand, dealerHand);
         String result;
-        if (samsHand.isBlackjack() || (dealerHand.isBusted() && !dealerHand.isDoubleAces())
-                || (samsHand.getTotalValue() > dealerHand.getTotalValue() && !samsHand.isBusted())) {
-            samWins = true;
-        }
-        if (samWins) {
-            result = "sam \n" + "sam:" + samsHand.toString() + "\ndealer:" + dealerHand.toString();
+
+        if (playerWon) {
+            result = PLAYER + "\n" + "sam:" + playerHand.toString() + "\ndealer:" + dealerHand.toString();
         } else {
-            result = "dealer \n" + "dealer:" + dealerHand.toString() + "\nsam:" + samsHand.toString();
+            result = "dealer \n" + "dealer:" + dealerHand.toString() + "\n" + PLAYER + ":" + playerHand.toString();
         }
         resultText.setText(result);
 

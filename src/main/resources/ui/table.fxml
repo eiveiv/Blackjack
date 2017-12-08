@@ -12,12 +12,12 @@
         <Pane prefHeight="200.0" prefWidth="200.0">
             <children>
                 <Label alignment="CENTER" layoutX="310.0" layoutY="129.0" text="Sam" />
-                <HBox fx:id="samCards" layoutX="7.0" layoutY="23.0" prefHeight="100.0" prefWidth="613.0" />
+                <HBox fx:id="playerCards" layoutX="7.0" layoutY="23.0" prefHeight="100.0" prefWidth="613.0" />
             </children></Pane>
         <Pane prefHeight="86.0" prefWidth="620.0">
             <children>
                 <Button fx:id="drawCard" layoutX="275.0" layoutY="2.0" mnemonicParsing="false" text="Draw card" />
-                <TextArea fx:id="resultText" editable="false" layoutY="2.0" prefHeight="58.0" prefWidth="200.0" />
+                <Label fx:id="resultText"  layoutY="2.0" prefHeight="58.0" prefWidth="200.0" />
                 <Button fx:id="newGame" layoutX="529.0" layoutY="2.0" mnemonicParsing="false" text="New game" />
             </children>
         </Pane>
