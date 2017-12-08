@@ -12,7 +12,7 @@ import java.io.IOException;
 public class TranslatorTest {
 
     @Test
-    public void mapToCard() {
+    public void mapToCard() throws Exception {
         Card card = Translator.doMap("CA");
         Card clubsOfAce = new Card(CardSuit.CLUBS, CardValue.ACE);
         Assert.assertTrue(clubsOfAce.getValue() == card.getValue());
@@ -20,7 +20,7 @@ public class TranslatorTest {
     }
 
     @Test
-    public void readFile() throws IOException {
+    public void readFile() throws Exception {
         String deckString = "CA, D5, H9, HQ, S8";
         Deck deck = Translator.toDeck(deckString);
         Assert.assertFalse(deck.getCards().isEmpty());

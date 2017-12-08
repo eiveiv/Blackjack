@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import model.Deck;
 import model.Hand;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import service.GameService;
 import translator.Translator;
 
@@ -33,16 +34,22 @@ public class TableController implements Initializable {
     @FXML
     private Label resultText;
 
-    private String path = "";
+    @FXML
+    private Label fileName;
+
+    @FXML
+    private Button removeFile;
 
     private static final String PLAYER = "Sam";
+    private static final String DEALER = "Dealer";
 
     private GameService gameService = new GameService();
 
 
     public void setParameter(String parameter) {
         if (parameter != null) {
-            path = parameter;
+            fileName.setText(parameter);
+            removeFile.setVisible(true);
         }
     }
 
@@ -50,21 +57,24 @@ public class TableController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("startup");
         drawCard.setDisable(true);
-        newGame.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
+        newGame.setOnAction(event -> {
             game();
-        }));
-
-
-
+        });
+        removeFile.setOnAction(event -> {
+            removeFile.setVisible(false);
+            fileName.setText("");
+        });
     }
 
     private void game() {
-
         init();
 
+        String filePath = "";
+        if (fileName != null) {
+            filePath = fileName.getText();
+        }
 
-        Deck deck = createDeck();
-
+        Deck deck = createDeck(filePath);
         Hand playerHand = new Hand();
         Hand dealerHand = new Hand();
 
@@ -102,15 +112,6 @@ public class TableController implements Initializable {
         dealerCards.getChildren().clear();
         drawCard.setDisable(false);
         resultText.setText("");
-
-    }
-
-    private Deck createDeckFromFile() throws Exception{
-        System.out.println("Creating new deck from" + path);
-        File file = new File(path);
-        String stringDeck = null;
-        stringDeck = FileUtils.readFileToString(file, "UTF-8");
-        return Translator.toDeck(stringDeck);
     }
 
     private void dealerDraw(Hand dealerHand, Hand samsHand, Deck deck) {
@@ -125,15 +126,19 @@ public class TableController implements Initializable {
         return new CardView(hand.addCard(deck.drawCard()));
     }
 
-    private Deck createDeck() {
-        System.out.println("Creating new deck");
+    private Deck createDeck(String path) {
         Deck newDeck = new Deck();
-        try {
-            newDeck = createDeckFromFile();
-        } catch (Exception e) {
-            newDeck.createDeck();
-            newDeck.shuffleNewDeck();
+        if (!StringUtils.isBlank(path)) {
+            try {
+                newDeck = gameService.createDeckFromFile(path);
+            } catch (Exception e) {
+                System.out.println("Failed creating deck from inputfile");
+                newDeck.createShuffleNewDeck();
+            }
+        } else {
+            newDeck.createShuffleNewDeck();
         }
+
         return newDeck;
     }
 
@@ -142,9 +147,9 @@ public class TableController implements Initializable {
         String result;
 
         if (playerWon) {
-            result = PLAYER + "\n" + "sam:" + playerHand.toString() + "\ndealer:" + dealerHand.toString();
+            result = PLAYER + "\n" + PLAYER + ":" + playerHand.toString() + "\n" + DEALER + dealerHand.toString();
         } else {
-            result = "dealer \n" + "dealer:" + dealerHand.toString() + "\n" + PLAYER + ":" + playerHand.toString();
+            result = DEALER + "\n" + DEALER + ":" + dealerHand.toString() + "\n" + PLAYER + ":" + playerHand.toString();
         }
         resultText.setText(result);
 

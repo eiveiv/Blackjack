@@ -14,38 +14,36 @@ import java.util.List;
 
 public class Translator {
 
-    public static Card doMap(String shortName) {
+    public static Card doMap(String shortName) throws Exception {
         String suit = shortName.substring(0,1);
         String value = shortName.substring(1, shortName.length());
-        Card card = new Card( toCardSuit(suit), toCardValue(value));
-        return card;
+        return new Card( toCardSuit(suit), toCardValue(value));
     }
 
-    public static CardSuit toCardSuit(String shortName) {
+    public static CardSuit toCardSuit(String shortName) throws Exception {
         for(CardSuit c: CardSuit.values()) {
             if (shortName.equals(c.getShortLetter())){
                 return c;
             }
         }
-        return null;
+        throw new Exception("Invalid cardsuit");
     }
 
-    public static CardValue toCardValue(String shortName) {
+    public static CardValue toCardValue(String shortName) throws Exception {
         for(CardValue c: CardValue.values()) {
             if (shortName.equals(c.getShortLetter())){
                 return c;
             }
         }
-        return null;
+        throw new Exception("Invalid cardsuit");
     }
 
-    public static Deck toDeck(String deckString) throws IOException {
+    public static Deck toDeck(String deckString) throws Exception {
         Deck deck = new Deck();
         List<String> cards = new ArrayList<>(Arrays.asList(deckString.split(",")));
-        cards.forEach(c -> {
-            deck.addCard( Translator.doMap(c.trim()));
-        });
-
+        for (String card : cards) {
+            deck.addCard( Translator.doMap(card.trim()));
+        }
         return deck;
     }
 }

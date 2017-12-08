@@ -13,7 +13,8 @@ public class Deck {
         this.cards = new ArrayList<>();
     }
 
-    public void shuffleNewDeck() {
+    public void createShuffleNewDeck() {
+        createDeck();
         Collections.shuffle(this.cards);
     }
 
@@ -21,7 +22,7 @@ public class Deck {
         this.cards.add(card);
     }
 
-    public void createDeck() {
+    private void createDeck() {
         Stream.of(CardSuit.values()).forEach(cs -> {
             Stream.of(CardValue.values()).forEach(cv -> {
                 this.cards.add( new Card(cs, cv));

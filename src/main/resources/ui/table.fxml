@@ -19,6 +19,8 @@
                 <Button fx:id="drawCard" layoutX="275.0" layoutY="2.0" mnemonicParsing="false" text="Draw card" />
                 <Label fx:id="resultText"  layoutY="2.0" prefHeight="58.0" prefWidth="200.0" />
                 <Button fx:id="newGame" layoutX="529.0" layoutY="2.0" mnemonicParsing="false" text="New game" />
+                <Label fx:id="fileName" layoutX="454.0" layoutY="36.0" prefHeight="17.0" prefWidth="130.0" />
+                <Button fx:id="removeFile" visible="false" layoutX="590.0" layoutY="32.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" text="X" />
             </children>
         </Pane>
     </children>
