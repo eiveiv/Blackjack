@@ -25,6 +25,8 @@ public class CardView extends Pane{
         rectangle.setHeight(80);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
+        rectangle.setArcWidth(8);
+        rectangle.setArcHeight(8);
         URL url = getClass().getResource("/images/" + shortName + ".png");
         Image image = new Image(url.toString());
         rectangle.setFill(new ImagePattern(image));
