@@ -1,10 +1,9 @@
-import model.Card;
-import model.CardSuit;
-import model.CardValue;
-import model.Hand;
+import model.*;
 import org.junit.Assert;
 import org.junit.Test;
 import service.GameService;
+
+import java.net.URL;
 
 public class GameServiceTest {
 
@@ -85,6 +84,16 @@ public class GameServiceTest {
         dealerHand.addCard( new Card(CardSuit.HEARTS, CardValue.KING));
         dealerHand.addCard( new Card(CardSuit.DIAMONDS, CardValue.EIGHT));
         Assert.assertFalse(gameService.winnerFromStart(playerHand, dealerHand));
+    }
+
+    @Test
+    public void createDeckFromFile() throws Exception {
+        URL resource = getClass().getClassLoader().getResource("cardDeck.csv");
+        Deck deckFromFile = gameService.createDeckFromFile(resource.getPath());
+        Assert.assertTrue(deckFromFile.getCards().size() == 5);
+        Assert.assertTrue(deckFromFile.getCards().get(0).getSuit() == CardSuit.CLUBS);
+        Assert.assertTrue(deckFromFile.getCards().get(0).getValue() == CardValue.ACE);
+
     }
 
 
