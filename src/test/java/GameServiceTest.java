@@ -96,5 +96,10 @@ public class GameServiceTest {
 
     }
 
+    @Test(expected = Exception.class)
+    public void createDeckFromFileFail() throws Exception {
+        gameService.createDeckFromFile("path/does/not/exist");
+    }
+
 
 }
