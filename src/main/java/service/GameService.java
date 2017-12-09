@@ -30,8 +30,7 @@ public class GameService {
     public Deck createDeckFromFile(String fileName) throws Exception{
         System.out.println("Creating new deck from" + fileName);
         File file = new File(fileName);
-        String stringDeck = null;
-        stringDeck = FileUtils.readFileToString(file, "UTF-8");
+        String stringDeck = FileUtils.readFileToString(file, "UTF-8");
         return Translator.toDeck(stringDeck);
     }
 }
