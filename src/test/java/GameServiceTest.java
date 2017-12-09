@@ -101,5 +101,13 @@ public class GameServiceTest {
         gameService.createDeckFromFile("path/does/not/exist");
     }
 
+    @Test(expected = Exception.class)
+    public void createDeckFromFileInvalid() throws Exception {
+        URL resource = getClass().getClassLoader().getResource("invalidCardDeck.csv");
+        gameService.createDeckFromFile(resource.getPath());
+
+
+    }
+
 
 }
