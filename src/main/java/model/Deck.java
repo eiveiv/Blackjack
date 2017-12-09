@@ -14,6 +14,7 @@ public class Deck {
     }
 
     public void createShuffleNewDeck() {
+        System.out.println("Creating new random shuffled deck");
         createDeck();
         Collections.shuffle(this.cards);
     }
