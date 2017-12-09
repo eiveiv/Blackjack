@@ -93,7 +93,6 @@ public class GameServiceTest {
         Assert.assertTrue(deckFromFile.getCards().size() == 5);
         Assert.assertTrue(deckFromFile.getCards().get(0).getSuit() == CardSuit.CLUBS);
         Assert.assertTrue(deckFromFile.getCards().get(0).getValue() == CardValue.ACE);
-
     }
 
     @Test(expected = Exception.class)
@@ -105,9 +104,6 @@ public class GameServiceTest {
     public void createDeckFromFileInvalid() throws Exception {
         URL resource = getClass().getClassLoader().getResource("invalidCardDeck.csv");
         gameService.createDeckFromFile(resource.getPath());
-
-
     }
-
 
 }

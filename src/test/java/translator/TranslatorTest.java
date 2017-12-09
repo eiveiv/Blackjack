@@ -27,5 +27,4 @@ public class TranslatorTest {
         Assert.assertTrue(deck.getCards().get(1).getSuit() == CardSuit.DIAMONDS);
     }
 
-
 }

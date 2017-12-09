@@ -14,21 +14,10 @@ public class DeckTest {
     }
 
     @Test
-    public void checkIfShuffled() {
-        Deck deck1 = new Deck();
-        Deck deck2 = new Deck();
-        deck1.createShuffleNewDeck();
-        deck2.createShuffleNewDeck();
-
-        Assert.assertTrue(deck1 != deck2);
-    }
-
-    @Test
     public void drawCard() throws Exception {
         Deck deck = new Deck();
         deck.createShuffleNewDeck();
         Card card = deck.drawCard();
-
         Assert.assertFalse(deck.getCards().contains(card));
     }
 }

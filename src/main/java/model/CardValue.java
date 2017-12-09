@@ -10,7 +10,7 @@ public enum CardValue {TWO("2"), THREE("3"), FOUR("4"), FIVE("5"), SIX("6"),SEVE
         this.shortLetter = shortLetter;
     }
 
-    public Integer getNumericValue() {
+    public int getNumericValue() {
         if (StringUtils.isNumeric(this.shortLetter)) {
             return Integer.valueOf(this.shortLetter);
         } else {
