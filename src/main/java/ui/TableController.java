@@ -133,6 +133,9 @@ public class TableController implements Initializable {
                 newDeck = gameService.createDeckFromFile(path);
             } catch (Exception e) {
                 System.out.println("Failed creating deck from inputfile");
+                fileName.setVisible(false);
+                fileName.setText("");
+                removeFile.setVisible(false);
                 newDeck.createShuffleNewDeck();
             }
         } else {
