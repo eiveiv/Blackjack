@@ -8,13 +8,13 @@
             <children>
                 <Label fx:id="dealerScore" layoutX="345.0" layoutY="6.0" text="" />
                 <Label alignment="CENTER" layoutX="296.0" layoutY="6.0" text="Dealer" />
-                <HBox fx:id="dealerCards" layoutX="7.0" layoutY="23.0" prefHeight="100.0" prefWidth="613.0" />
+                <HBox fx:id="dealerCards" alignment="CENTER" layoutX="7.0" layoutY="23.0" prefHeight="100.0" prefWidth="605.0" />
             </children></Pane>
         <Pane prefHeight="200.0" prefWidth="200.0">
             <children>
                 <Label fx:id="playerScore" layoutX="345.0" layoutY="129.0" text="" />
                 <Label alignment="CENTER" layoutX="296.0" layoutY="129.0" text="Sam" />
-                <HBox fx:id="playerCards" layoutX="7.0" layoutY="23.0" prefHeight="100.0" prefWidth="613.0" />
+                <HBox fx:id="playerCards" alignment="CENTER" layoutX="7.0" layoutY="23.0" prefHeight="100.0" prefWidth="605.0" />
             </children></Pane>
         <Pane prefHeight="86.0" prefWidth="620.0">
             <children>

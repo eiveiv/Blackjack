@@ -138,13 +138,12 @@ public class TableController implements Initializable {
                 newDeck = gameService.createDeckFromFile(path);
                 if (!gameService.isValidDeck(newDeck)) {
                     System.out.println("Invalid deck, cant finish a game");
+                    clearInputFile();
                     newDeck.createShuffleNewDeck();
                 }
             } catch (Exception e) {
                 System.out.println("Failed creating deck from inputfile");
-                fileName.setVisible(false);
-                fileName.setText("");
-                removeFile.setVisible(false);
+                clearInputFile();
                 newDeck.createShuffleNewDeck();
             }
         } else {
@@ -152,6 +151,12 @@ public class TableController implements Initializable {
         }
 
         return newDeck;
+    }
+
+    private void clearInputFile() {
+        fileName.setVisible(false);
+        fileName.setText("");
+        removeFile.setVisible(false);
     }
 
     private void gameOver(Hand playerHand, Hand dealerHand) {
