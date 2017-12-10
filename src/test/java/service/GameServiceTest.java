@@ -1,7 +1,8 @@
+package service;
+
 import model.*;
 import org.junit.Assert;
 import org.junit.Test;
-import service.GameService;
 
 import java.net.URL;
 

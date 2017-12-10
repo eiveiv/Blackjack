@@ -4,16 +4,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import model.Deck;
 import model.Hand;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import service.GameService;
-import translator.Translator;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
