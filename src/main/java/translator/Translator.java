@@ -4,17 +4,14 @@ import model.Card;
 import model.CardSuit;
 import model.CardValue;
 import model.Deck;
-import org.apache.commons.io.IOUtils;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Translator {
 
-    public static Card doMap(String shortName) throws Exception {
+    public static Card toCard(String shortName) throws Exception {
         String suit = shortName.substring(0,1);
         String value = shortName.substring(1, shortName.length());
         return new Card( toCardSuit(suit), toCardValue(value));
@@ -42,7 +39,7 @@ public class Translator {
         Deck deck = new Deck();
         List<String> cards = new ArrayList<>(Arrays.asList(deckString.split(",")));
         for (String card : cards) {
-            deck.addCard( Translator.doMap(card.trim()));
+            deck.addCard( Translator.toCard(card.trim()));
         }
         return deck;
     }

@@ -7,13 +7,11 @@ import model.Deck;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.IOException;
-
 public class TranslatorTest {
 
     @Test
     public void mapToCard() throws Exception {
-        Card card = Translator.doMap("CA");
+        Card card = Translator.toCard("CA");
         Card clubsOfAce = new Card(CardSuit.CLUBS, CardValue.ACE);
         Assert.assertTrue(clubsOfAce.getValue() == card.getValue());
         Assert.assertTrue(clubsOfAce.getSuit() == card.getSuit());
