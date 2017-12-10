@@ -13,7 +13,7 @@ import static model.CardValue.TEN;
 public class CardTest {
 
     @Test
-    public void getCardShortName() {
+    public void getCardShortNames() {
         Card card1 = new Card(CLUBS, JACK);
         Assert.assertTrue("CJ".equals(card1.getShortName()));
 
