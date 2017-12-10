@@ -9,7 +9,8 @@ Blackjack spill med følgende regler.
 Kan legge inn input fil som kortstokk, må være kommeseparert på følgende format D5,HJ,DK osv
 Hvis filen ikke finnes så lages det bare en vanlig kortstokk som stokkes
 
-For å kjøre fra kommandolinje må man bruke jar-with-dependencies
+For å kjøre fra kommandolinje må man først bygge med maven,
+og så kjøre jar-with-dependencies
 Eks
 
 java -jar target/Blackjack-1.0-SNAPSHOT-jar-with-dependencies.jar /home/somefolder/textfiles/card32sv
