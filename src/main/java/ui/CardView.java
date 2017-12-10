@@ -20,7 +20,6 @@ public class CardView extends Pane{
         Rectangle rectangle = new Rectangle();
         rectangle.setWidth(80);
         rectangle.setHeight(80);
-        rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
         rectangle.setArcWidth(8);
         rectangle.setArcHeight(8);
