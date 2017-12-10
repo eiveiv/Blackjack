@@ -23,7 +23,7 @@ public class Hand {
         return cards;
     }
 
-    public int getTotalValue() {
+    public Integer getTotalValue() {
         int value = 0;
         for (Card c : this.cards) {
             value += c.getNumericValue();

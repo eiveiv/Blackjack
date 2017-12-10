@@ -38,6 +38,12 @@ public class TableController implements Initializable {
     private Label fileName;
 
     @FXML
+    private Label dealerScore;
+
+    @FXML
+    private Label playerScore;
+
+    @FXML
     private Button removeFile;
 
     private static final String PLAYER = "Sam";
@@ -110,6 +116,8 @@ public class TableController implements Initializable {
         dealerCards.getChildren().clear();
         drawCard.setDisable(false);
         resultText.setText("");
+        playerScore.setText("");
+        dealerScore.setText("");
     }
 
     private void dealerDraw(Hand dealerHand, Hand samsHand, Deck deck) {
@@ -155,7 +163,8 @@ public class TableController implements Initializable {
         } else {
             result = DEALER + "\n" + DEALER + ":" + dealerHand.toString() + "\n" + PLAYER + ":" + playerHand.toString();
         }
+        playerScore.setText(playerHand.getTotalValue().toString());
+        dealerScore.setText(dealerHand.getTotalValue().toString());
         resultText.setText(result);
-
     }
 }
