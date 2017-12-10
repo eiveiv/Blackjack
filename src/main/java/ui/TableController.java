@@ -69,7 +69,7 @@ public class TableController implements Initializable {
 
     private void game() {
         init();
-
+        boolean gameOver = false;
         String filePath = null;
         if (fileName != null) {
             filePath = fileName.getText();
@@ -85,10 +85,12 @@ public class TableController implements Initializable {
         dealerCards.getChildren().add(drawCard(dealerHand, deck));
 
         if (gameService.winnerFromStart(playerHand, dealerHand)) {
-            gameOver(playerHand, dealerHand);
+            gameOver = true;
+            drawCard.setDisable(true);
+            endGame(playerHand, dealerHand);
         }
 
-        if (playerHand.stopDrawingCards()) {
+        if (playerHand.stopDrawingCards() && !gameOver) {
             drawCard.setDisable(true);
             dealerDraw(dealerHand, playerHand, deck);
         }
@@ -97,7 +99,7 @@ public class TableController implements Initializable {
             playerCards.getChildren().add(drawCard(playerHand, deck));
             if (playerHand.isBusted()) {
                 drawCard.setDisable(true);
-                gameOver(playerHand, dealerHand);
+                endGame(playerHand, dealerHand);
             } else if(playerHand.stopDrawingCards()) {
                 drawCard.setDisable(true);
                 dealerDraw(dealerHand, playerHand, deck);
@@ -120,7 +122,7 @@ public class TableController implements Initializable {
         while(dealerHand.getTotalValue() <= samsHand.getTotalValue()) {
             dealerCards.getChildren().add(drawCard(dealerHand, deck));
         }
-        gameOver(samsHand, dealerHand);
+        endGame(samsHand, dealerHand);
     }
 
     private CardView drawCard(Hand hand, Deck deck) {
@@ -155,7 +157,7 @@ public class TableController implements Initializable {
         removeFile.setVisible(false);
     }
 
-    private void gameOver(Hand playerHand, Hand dealerHand) {
+    private void endGame(Hand playerHand, Hand dealerHand) {
         boolean playerWon = gameService.playerWon(playerHand, dealerHand);
         String result;
 
