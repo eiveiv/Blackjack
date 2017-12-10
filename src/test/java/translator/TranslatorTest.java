@@ -17,6 +17,11 @@ public class TranslatorTest {
         Assert.assertTrue(clubsOfAce.getSuit() == card.getSuit());
     }
 
+    @Test(expected = Exception.class)
+    public void mapToCardIvalid() throws Exception {
+        Translator.toCard("543");
+    }
+
     @Test
     public void readFile() throws Exception {
         String deckString = "CA, D5, H9, HQ, S8";
