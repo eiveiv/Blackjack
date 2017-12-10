@@ -2,13 +2,13 @@ package model;
 
 public enum CardSuit { CLUBS("C"), DIAMONDS("D"), HEARTS("H"), SPADES("S");
 
-    private String shortLetter;
+    private String shortName;
 
-    CardSuit(String shortLetter) {
-        this.shortLetter = shortLetter;
+    CardSuit(String shortName) {
+        this.shortName = shortName;
     }
 
-    public String getShortLetter() {
-        return this.shortLetter;
+    public String getShortName() {
+        return this.shortName;
     }
 }

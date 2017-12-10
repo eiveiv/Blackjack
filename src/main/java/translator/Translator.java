@@ -19,7 +19,7 @@ public class Translator {
 
     public static CardSuit toCardSuit(String shortName) throws Exception {
         for(CardSuit c: CardSuit.values()) {
-            if (shortName.equals(c.getShortLetter())){
+            if (shortName.equals(c.getShortName())){
                 return c;
             }
         }
@@ -28,7 +28,7 @@ public class Translator {
 
     public static CardValue toCardValue(String shortName) throws Exception {
         for(CardValue c: CardValue.values()) {
-            if (shortName.equals(c.getShortLetter())){
+            if (shortName.equals(c.getShortName())){
                 return c;
             }
         }

@@ -12,6 +12,12 @@ public class CardValueTest {
     }
 
     @Test
+    public void checkNumericValueAce() {
+        Integer numericValue = CardValue.ACE.getNumericValue();
+        Assert.assertTrue(11 == numericValue);
+    }
+
+    @Test
     public void checkNumericValueFive() {
         Integer numericValue = CardValue.FIVE.getNumericValue();
         Assert.assertTrue(5 == numericValue);

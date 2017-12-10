@@ -23,6 +23,6 @@ public class Card {
     }
 
     public String getShortName() {
-        return this.suit.getShortLetter() + this.value.getShortLetter();
+        return this.suit.getShortName() + this.value.getShortName();
     }
 }
