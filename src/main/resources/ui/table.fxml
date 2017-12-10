@@ -6,12 +6,12 @@
     <children>
         <Pane prefHeight="200.0" prefWidth="200.0">
             <children>
-                <Label alignment="CENTER" layoutX="310.0" layoutY="6.0" text="Dealer" />
+                <Label alignment="CENTER" layoutX="296.0" layoutY="6.0" text="Dealer" />
                 <HBox fx:id="dealerCards" layoutX="7.0" layoutY="23.0" prefHeight="100.0" prefWidth="613.0" />
             </children></Pane>
         <Pane prefHeight="200.0" prefWidth="200.0">
             <children>
-                <Label alignment="CENTER" layoutX="310.0" layoutY="129.0" text="Sam" />
+                <Label alignment="CENTER" layoutX="296.0" layoutY="129.0" text="Sam" />
                 <HBox fx:id="playerCards" layoutX="7.0" layoutY="23.0" prefHeight="100.0" prefWidth="613.0" />
             </children></Pane>
         <Pane prefHeight="86.0" prefWidth="620.0">

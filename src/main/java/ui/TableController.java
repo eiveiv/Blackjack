@@ -55,7 +55,6 @@ public class TableController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("startup");
         drawCard.setDisable(true);
         newGame.setOnAction(event -> {
             game();
@@ -69,7 +68,7 @@ public class TableController implements Initializable {
     private void game() {
         init();
 
-        String filePath = "";
+        String filePath = null;
         if (fileName != null) {
             filePath = fileName.getText();
         }
@@ -94,7 +93,6 @@ public class TableController implements Initializable {
 
         drawCard.setOnAction(event -> {
             playerCards.getChildren().add(drawCard(playerHand, deck));
-            System.out.println("sam trakk trakk kort");
             if (playerHand.isBusted()) {
                 drawCard.setDisable(true);
                 gameOver(playerHand, dealerHand);
@@ -117,7 +115,6 @@ public class TableController implements Initializable {
     private void dealerDraw(Hand dealerHand, Hand samsHand, Deck deck) {
         while(dealerHand.getTotalValue() <= samsHand.getTotalValue()) {
             dealerCards.getChildren().add(drawCard(dealerHand, deck));
-            System.out.println("dealer trakk kort");
         }
         gameOver(samsHand, dealerHand);
     }
@@ -131,6 +128,10 @@ public class TableController implements Initializable {
         if (!StringUtils.isBlank(path)) {
             try {
                 newDeck = gameService.createDeckFromFile(path);
+                if (!gameService.isValidDeck(newDeck)) {
+                    System.out.println("Invalid deck, cant finish a game");
+                    newDeck.createShuffleNewDeck();
+                }
             } catch (Exception e) {
                 System.out.println("Failed creating deck from inputfile");
                 fileName.setVisible(false);

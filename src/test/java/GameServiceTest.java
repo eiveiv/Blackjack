@@ -106,4 +106,39 @@ public class GameServiceTest {
         gameService.createDeckFromFile(resource.getPath());
     }
 
+    @Test
+    public void isValidDeck() throws Exception {
+        Deck deck = new Deck();
+        deck.addCard( new Card(CardSuit.CLUBS, CardValue.ACE));
+        deck.addCard( new Card(CardSuit.CLUBS, CardValue.TWO));
+        deck.addCard( new Card(CardSuit.CLUBS, CardValue.ACE));
+        deck.addCard( new Card(CardSuit.CLUBS, CardValue.TWO));
+        Assert.assertTrue(gameService.isValidDeck(deck));
+    }
+
+    @Test
+    public void isInvalidDeck() throws Exception {
+        Deck deck = new Deck();
+        deck.addCard( new Card(CardSuit.SPADES, CardValue.FIVE));
+        deck.addCard( new Card(CardSuit.DIAMONDS, CardValue.TWO));
+        deck.addCard( new Card(CardSuit.CLUBS, CardValue.ACE));
+        deck.addCard( new Card(CardSuit.HEARTS, CardValue.SEVEN));
+        Assert.assertFalse(gameService.isValidDeck(deck));
+    }
+
+    @Test
+    public void isValidDeck2() throws Exception {
+        Deck deck = new Deck();
+        deck.addCard( new Card(CardSuit.SPADES, CardValue.TEN));
+        deck.addCard( new Card(CardSuit.DIAMONDS, CardValue.TWO));
+        deck.addCard( new Card(CardSuit.CLUBS, CardValue.FIVE));
+        deck.addCard( new Card(CardSuit.HEARTS, CardValue.SEVEN));
+        deck.addCard( new Card(CardSuit.HEARTS, CardValue.THREE));
+        deck.addCard( new Card(CardSuit.DIAMONDS, CardValue.SEVEN));
+        deck.addCard( new Card(CardSuit.HEARTS, CardValue.EIGHT));
+        deck.addCard( new Card(CardSuit.SPADES, CardValue.SEVEN));
+        deck.addCard( new Card(CardSuit.HEARTS, CardValue.TEN));
+        Assert.assertTrue(gameService.isValidDeck(deck));
+    }
+
 }

@@ -24,6 +24,7 @@ public class Deck {
     }
 
     private void createDeck() {
+        this.cards = new ArrayList<>();
         Stream.of(CardSuit.values()).forEach(cs -> {
             Stream.of(CardValue.values()).forEach(cv -> {
                 this.cards.add( new Card(cs, cv));
@@ -44,4 +45,5 @@ public class Deck {
             return null;
         }
     }
+
 }
