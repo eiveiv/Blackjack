@@ -162,9 +162,9 @@ public class TableController implements Initializable {
         String result;
 
         if (playerWon) {
-            result = PLAYER + "\n" + PLAYER + ":" + playerHand.toString() + "\n" + DEALER + dealerHand.toString();
+            result = PLAYER + "\n" + PLAYER + ": " + playerHand.toString() + "\n" + DEALER + ": " + dealerHand.toString();
         } else {
-            result = DEALER + "\n" + DEALER + ":" + dealerHand.toString() + "\n" + PLAYER + ":" + playerHand.toString();
+            result = DEALER + "\n" + DEALER + ": " + dealerHand.toString() + "\n" + PLAYER + ": " + playerHand.toString();
         }
         playerScore.setText(playerHand.getTotalValue().toString());
         dealerScore.setText(dealerHand.getTotalValue().toString());

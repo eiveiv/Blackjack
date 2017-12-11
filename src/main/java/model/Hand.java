@@ -57,7 +57,7 @@ public class Hand {
 
     @Override
     public String toString() {
-        StringJoiner stringJoiner = new StringJoiner(",");
+        StringJoiner stringJoiner = new StringJoiner(", ");
         this.cards.forEach(c -> {
             stringJoiner.add(c.getShortName());
         });
