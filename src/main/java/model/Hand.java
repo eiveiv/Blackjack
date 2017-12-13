@@ -24,11 +24,7 @@ public class Hand {
     }
 
     public Integer getTotalValue() {
-        int value = 0;
-        for (Card c : this.cards) {
-            value += c.getNumericValue();
-        }
-        return value;
+        return this.cards.stream().mapToInt(Card::getNumericValue).sum();
     }
 
     public boolean isBlackjack() {
