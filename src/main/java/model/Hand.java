@@ -19,10 +19,6 @@ public class Hand {
         return card;
     }
 
-    public List<Card> getCards() {
-        return cards;
-    }
-
     public Integer getTotalValue() {
         return this.cards.stream().mapToInt(Card::getNumericValue).sum();
     }
